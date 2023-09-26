@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>welcolm to main</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/main.css') }}">
+    <script src="{{ url_for('static',filename='js/main.js') }}"> </script>
+
+</head>
+<body>
+
+
+<!---signup shett--->
+<form action="{{ url_for('submit')}}" method="POST">
+    <div>
+        <input type="text" id="updq" name="itemtoadd"placeholder="item to add">
+    </div>
+    <div>
+        <input type="text" id="updq" name="prio"placeholder="priority of item">
+    </div>
+    <div>
+        <select name="allcats">
+            <option value="{{allcats[0]}}" selected>{{allcats[0]}}</option>
+            {% for m in allcats[1:] %}
+              <option value="{{m}}">{{m}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div>
+        <select name="subcats">
+        </select>
+    </div> 
+    <button type="submit" >submit</button>
+</form>
+<!--everything in our db-->
+<div>
+    <h2>Your Tasks</h2>
+    <form action="{{ url_for('process_checkboxes')}}" method="POST">
+        <table border="1">
+            <thead>
+                <tr>
+                   
+                    <th>Category</th>
+                    <th>Class</th>
+                    <th>Name</th>
+                    <th>Priority</th>
+                    <th>Select</th> 
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                    <tr>
+                        
+                        <td>{{ task[1] }}</td> <!-- Category -->
+                        <td>{{ task[2] }}</td> <!-- Class -->
+                        <td>{{ task[3] }}</td> <!-- Name -->
+                        <td>{{ task[4] }}</td> <!-- Priority -->
+                        <td><input type="checkbox" name="task_ids" value="{{task[0]}}"></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <input type="submit" name = 'process' value="cancel">
+        <input type="submit" name = 'process' value="delete">
+    </form>
+</div>
+<!--make catagory and class-->
+<div id="makecatnclass">
+    <form action="{{ url_for('submitupd')}}" method="POST">
+        <div>
+            <input type="text" id="catmake" name="makeacat"placeholder="build cat (dont dupe)">
+        </div>
+        <button type="submit" >submit the catagory</button>
+        <div>
+            <input type="text" id="updq" name="makeaclass"placeholder="makea class">
+            <select name="allcats">
+                <option value="{{allcats[0]}}" selected>{{allcats[0]}}</option>
+                {% for m in allcats[1:] %}
+                  <option value="{{m}}">{{m}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" >submit the class</button>
+    </form>
+</div>
+
+
+</body>
+</html>
