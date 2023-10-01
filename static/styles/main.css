@@ -24,3 +24,11 @@ tr:nth-child(even) {
 
 
 }
+
+#destoryclass {
+    border: 10px solid #0004ff;
+    padding: 10px;
+    position: absolute;
+    top: 80%;
+    left: 30%;
+}
