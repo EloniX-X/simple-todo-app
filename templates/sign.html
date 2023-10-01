@@ -82,7 +82,19 @@
         <button type="submit" >submit the class</button>
     </form>
 </div>
-
-
+<!--destroy catagory-->
+<div id="destoryclass">
+    <form action="{{ url_for('submitupd')}}" method="POST">
+        <div>
+            <select name="destroycat">
+                <option value="{{allcats[0]}}" selected>{{allcats[0]}}</option>
+                {% for m in allcats[1:] %}
+                  <option value="{{m}}">{{m}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" >destroy the cat</button>
+    </form>
+</div>
 </body>
 </html>
