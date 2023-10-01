@@ -34,6 +34,14 @@ def submit():
 def submitupd():
     con = sqlite3.connect("todo.db")
     cur = con.cursor()
+    if request.form.get('destroycat'):
+        destroycat = request.form.get('destroycat')
+        print(destroycat)
+        cur.execute("DELETE FROM todo WHERE cat = ?", (destroycat,))
+        con.commit()
+        con.close()
+        return redirect(url_for('main'))
+    
     if request.form.get('makeacat'):
         catmake = request.form.get('makeacat')
         cur.execute("insert into todo (cat) VALUES (?)", (catmake,))
